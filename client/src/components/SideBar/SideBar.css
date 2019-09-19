@@ -1,0 +1,25 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.sidebar_logo_link {
+  align-self: flex-start;
+  margin: 1.5rem 1rem;
+}
+
+.sidebar_logo {
+  width: 8rem;
+}
+
+.sidebar_subreddits_header {
+  color: var(--orange);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 1rem 1rem;
+}
+
+.sidebar_subreddits {
+  overflow-y: scroll;
+}

@@ -1,0 +1,17 @@
+.sidebar_sub {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+}
+
+.sidebar_sub:hover {
+  border-left: 3px solid var(--orange);
+}
+
+.sidebar_sub_name {
+  font-size: 1rem;
+  margin-top: 0.2rem;
+}

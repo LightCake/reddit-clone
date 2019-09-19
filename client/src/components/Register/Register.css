@@ -1,0 +1,8 @@
+.register_header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.register_form input {
+  margin-bottom: 1.5rem;
+}

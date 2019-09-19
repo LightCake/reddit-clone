@@ -1,0 +1,4 @@
+.main_feed {
+  background: rgb(241, 241, 241);
+  grid-column: 2/-1;
+}

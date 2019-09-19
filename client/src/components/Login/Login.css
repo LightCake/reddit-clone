@@ -1,0 +1,8 @@
+.login_header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login_form input {
+  margin-bottom: 1.5rem;
+}
