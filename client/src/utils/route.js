@@ -34,7 +34,7 @@ const Protected = ({
         <Component {...props} />
       ) : (
         // Redirect to the login page if the user is not authenticated
-        <Redirect to="/login" />
+        <Redirect to="/" />
       )
     }
   />

@@ -9,7 +9,9 @@ export const receiveAllSubreddits = subreddits => ({
   subreddits
 });
 
-// TODO
-export const fetchAllSubreddits = () => dispatch => {
-  API.fetchAllSubreddits().then(res => console.log(res));
+export const fetchAllSubreddits = (setLoading, search) => dispatch => {
+  API.fetchAllSubreddits(search).then(res => {
+    dispatch(receiveAllSubreddits(res.data));
+    setLoading(false);
+  });
 };

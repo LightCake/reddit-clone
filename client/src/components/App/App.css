@@ -16,16 +16,17 @@ body {
 
 :root {
   --orange: #ff4500;
+  --grey: #878a8c;
 }
 
 .app {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
 }
 
 .app > :nth-child(2) {
-  flex: 1;
+  grid-column: 2/-1;
   /* Prevent child from growing bigger than the flexbox container */
   min-height: 0;
 }

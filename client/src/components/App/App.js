@@ -1,18 +1,26 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { AuthRoute, ProtectedRoute } from "../../utils/route";
-import MainContainer from "../Main/MainContainer";
-import LoginContainer from "../Login/LoginContainer";
-import RegisterContainer from "../Register/RegisterContainer";
 import "./App.css";
+import SideBarContainer from "../SideBar/SideBarContainer";
+import MainFeedContainer from "../MainFeed/MainFeedContainer";
+import PostFormContainer from "../PostForm/PostFormContainer";
 
 const App = () => {
   return (
     <div className="app">
+      <SideBarContainer />
       <Switch>
-        <AuthRoute exact path="/" component={MainContainer} />
-        <AuthRoute exact path="/login" component={LoginContainer} />
-        <AuthRoute exact path="/register" component={RegisterContainer} />
+        <Route
+          exact
+          path={["/", "/r/:subreddit"]}
+          component={MainFeedContainer}
+        />
+        <ProtectedRoute
+          exact
+          path="/r/:subreddit/post"
+          component={PostFormContainer}
+        />
       </Switch>
     </div>
   );

@@ -3,10 +3,14 @@ import PropTypes from "prop-types";
 import "./Button.css";
 
 const Button = props => {
-  const { type, label, style, onClick } = props;
+  const { type, label, style, onClick, className } = props;
 
   return (
-    <button type={type} className="button" style={style} onClick={onClick}>
+    <button
+      type={type}
+      className={`button ${className === undefined ? "" : className}`}
+      onClick={onClick}
+    >
       {label}
     </button>
   );

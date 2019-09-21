@@ -1,0 +1,95 @@
+.postcard {
+  display: flex;
+  cursor: pointer;
+}
+
+.postcard_sidebar {
+  width: 2.5rem;
+  background: rgb(248, 249, 250);
+}
+
+.postcard_votes {
+  font-size: 0.8rem;
+  margin: 0.3rem 0;
+}
+
+.postcard_arrows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+.postcard_main {
+  flex: 1;
+  background: white;
+  padding: 0.5rem;
+}
+
+.postcard_main_header {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.postcard_main_header > *:not(:last-of-type) {
+  margin-right: 0.3rem;
+}
+
+.postcard_main_dot {
+  font-weight: 700;
+}
+
+.postcard_main_subreddit {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.postcard_main_center {
+  margin: 1rem 0;
+}
+
+.postcard_main_title {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.postcard_main_text {
+  margin-top: 1rem;
+  max-height: 10rem;
+  overflow: hidden;
+  position: relative;
+  line-height: 1.3;
+}
+
+.postcard_main_text:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(transparent 8rem, white);
+}
+
+.postcard_join {
+  padding: 0.3rem;
+  margin-left: auto;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.postcard_main_footer {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.postcard_footer_comments {
+  display: flex;
+  color: var(--grey);
+}
+
+.postcard_comment_numbers {
+  margin-left: 0.3rem;
+}

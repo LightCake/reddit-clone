@@ -19,6 +19,7 @@ CREATE TABLE posts (
   ID SERIAL PRIMARY KEY,
   user_id INT,
   subreddit_id INT,
+  title VARCHAR(100),
   text VARCHAR,
   created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(ID),
@@ -36,3 +37,15 @@ CREATE TABLE comments (
   FOREIGN KEY (post_id) REFERENCES posts(ID),
   FOREIGN KEY (comment_id) REFERENCES comments(ID)
 );
+
+CREATE TABLE post_votes (
+  id SERIAL PRIMARY KEY,
+  user_id INT,
+  post_id INT,
+  vote INT,
+  created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(ID),
+  FOREIGN KEY (post_id) REFERENCES posts(ID),
+  CHECK (vote IN (-1, 1))
+);
+

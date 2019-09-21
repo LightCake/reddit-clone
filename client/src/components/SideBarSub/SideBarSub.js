@@ -1,12 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import "./SideBarSub.css";
 
 const SideBarSub = props => {
-  const { name } = props;
+  const { name, history } = props;
+
+  const handleClick = () => history.push(`/r/${name}`);
 
   return (
-    <div className="sidebar_sub">
+    <div className="sidebar_sub" onClick={handleClick}>
       <div className="sidebar_sub_name">{name}</div>
     </div>
   );
@@ -14,4 +17,4 @@ const SideBarSub = props => {
 
 SideBarSub.propTypes = {};
 
-export default SideBarSub;
+export default withRouter(SideBarSub);

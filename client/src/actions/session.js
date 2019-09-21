@@ -60,6 +60,6 @@ export const logout = () => dispatch => {
 // TODO: Instead of pushing to login page, open the login modal form
 export const register = (user, history) => dispatch => {
   API.register(user)
-    .then(() => history.push("/login"))
+    .then(() => console.log("Success"))
     .catch(err => dispatch(receiveErrors(err.response.data)));
 };

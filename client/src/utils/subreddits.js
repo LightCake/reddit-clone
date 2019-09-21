@@ -1,5 +1,5 @@
 import axios from "axios";
 
-export const fetchAllSubreddits = () => {
-  return axios.get("/api/subreddits/all");
+export const fetchAllSubreddits = (search = "") => {
+  return axios.get(`/api/subreddits/all/${search}`);
 };
