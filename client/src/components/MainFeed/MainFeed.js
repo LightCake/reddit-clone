@@ -62,6 +62,7 @@ const MainFeed = props => {
               className="main_feed_sort"
             />
           </div>
+          {match.params.subreddit && <div>{match.params.subreddit}</div>}
         </div>
         <div className="main_feed_header_right">{renderAuth()}</div>
       </div>

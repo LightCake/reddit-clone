@@ -54,4 +54,137 @@ router.post(
   }
 );
 
+router.post(
+  "/upvote/:post_id",
+  passport.authenticate("jwt", { session: false }),
+  (request, response) => {
+    // Check whether the post with the given id exists
+    db.query(
+      "SELECT EXISTS (SELECT 1 FROM posts WHERE id = $1)",
+      [request.params.post_id],
+      (err, res) => {
+        if (err) throw err;
+
+        if (res.rows[0].exists) {
+          db.query(
+            "SELECT * FROM post_votes WHERE post_id = $1 AND user_id = $2",
+            [request.params.post_id, request.user.id],
+            (err, res) => {
+              if (err) throw err;
+              // If the user already voted for the post
+              if (res.rows.length > 0) {
+                const vote = res.rows[0];
+                // If the user already upvoted the post, delete it from the database
+                if (vote.vote === 1) {
+                  db.query(
+                    "DELETE FROM post_votes WHERE post_id = $1 AND user_id = $2",
+                    [request.params.post_id, request.user.id],
+                    (err, res) => {
+                      if (err) throw err;
+
+                      if (res) response.json({ msg: "success" });
+                    }
+                  );
+                } else {
+                  // If the user already downvoted the post, upvote the post
+                  db.query(
+                    "UPDATE post_votes set vote = 1 WHERE id = $1",
+                    [vote.id],
+                    (err, res) => {
+                      if (err) throw err;
+
+                      if (res) response.json({ msg: "success" });
+                    }
+                  );
+                }
+              } else {
+                // If the user never voted the post, insert new vote into the database
+                db.query(
+                  "INSERT INTO post_votes (user_id, post_id, vote) VALUES ($1, $2, $3)",
+                  [request.user.id, request.params.post_id, 1],
+                  (err, res) => {
+                    if (err) throw err;
+
+                    if (res) response.json({ msg: "success" });
+                  }
+                );
+              }
+            }
+          );
+        } else {
+          // If the post does not exist return error response
+          return response.status(400).json({ post: "Post not found" });
+        }
+      }
+    );
+  }
+);
+
+router.post(
+  "/downvote/:post_id",
+  passport.authenticate("jwt", { session: false }),
+  (request, response) => {
+    // Check whether the post with the given id exists
+    db.query(
+      "SELECT EXISTS (SELECT 1 FROM posts WHERE id = $1)",
+      [request.params.post_id],
+      (err, res) => {
+        if (err) throw err;
+        // If the post exists
+        if (res.rows[0].exists) {
+          // look for the user's vote of the post
+          db.query(
+            "SELECT * FROM post_votes WHERE post_id = $1 AND user_id = $2",
+            [request.params.post_id, request.user.id],
+            (err, res) => {
+              if (err) throw err;
+              // If the user already voted for the post
+              if (res.rows.length > 0) {
+                const vote = res.rows[0];
+                // If the user already upvoted the post, change it to a downvote
+                if (vote.vote === 1) {
+                  db.query(
+                    "UPDATE post_votes set vote = -1 WHERE id = $1",
+                    [vote.id],
+                    (err, res) => {
+                      if (err) throw err;
+
+                      if (res) response.json({ msg: "success" });
+                    }
+                  );
+                } else {
+                  // If the user already downvoted the post, delete it
+                  db.query(
+                    "DELETE FROM post_votes WHERE post_id = $1 AND user_id = $2",
+                    [request.params.post_id, request.user.id],
+                    (err, res) => {
+                      if (err) throw err;
+
+                      if (res) response.json({ msg: "success" });
+                    }
+                  );
+                }
+              } else {
+                // If the user never voted the post, insert new downvote into the database
+                db.query(
+                  "INSERT INTO post_votes (user_id, post_id, vote) VALUES ($1, $2, $3)",
+                  [request.user.id, request.params.post_id, -1],
+                  (err, res) => {
+                    if (err) throw err;
+
+                    if (res) response.json({ msg: "success" });
+                  }
+                );
+              }
+            }
+          );
+        } else {
+          // If the post with the id does not exist return error response
+          return response.status(400).json({ post: "Post not found" });
+        }
+      }
+    );
+  }
+);
+
 module.exports = router;
