@@ -4,18 +4,13 @@ const db = require("../db");
 
 const router = express.Router();
 
-router.get("/all", (request, response) => {
-  db.query("SELECT * FROM posts", (err, res) => {
-    if (err) throw err;
-
-    if (res) response.send(res.rows);
-  });
-});
-
-router.get("/subreddit/:name", (request, response) => {
+// Get all posts
+router.get("/all/:subreddit?", (request, response) => {
+  const option = request.params.subreddit ? request.params.subreddit : null;
+  console.log(option);
   db.query(
-    "SELECT p.id, p.user_id, p.subreddit_id, s.name, p.title, p.text, p.created FROM posts p LEFT OUTER JOIN subreddits s ON (p.subreddit_id = s.id) WHERE s.name = $1",
-    [request.params.name],
+    "SELECT p.id, p.user_id, p.subreddit_id, p.title, p.text, p.created, sr.name as subreddit, u.name as username, SUM(pv.vote) as votes, COUNT(c.id) as comments FROM posts p LEFT OUTER JOIN post_votes pv ON (p.id = pv.post_id) LEFT OUTER JOIN subreddits sr ON (sr.id = p.subreddit_id) LEFT OUTER JOIN users u ON (u.id = p.user_id) LEFT OUTER JOIN comments c ON (c.post_id = p.id) WHERE ($1 = sr.name or $1 is null) GROUP BY p.id, sr.name, u.name",
+    [option],
     (err, res) => {
       if (err) throw err;
 
@@ -24,6 +19,7 @@ router.get("/subreddit/:name", (request, response) => {
   );
 });
 
+// Add a new post
 router.post(
   "/add",
   passport.authenticate("jwt", { session: false }),
@@ -54,6 +50,7 @@ router.post(
   }
 );
 
+// Upvote a post
 router.post(
   "/upvote/:post_id",
   passport.authenticate("jwt", { session: false }),
@@ -120,6 +117,7 @@ router.post(
   }
 );
 
+// Downvote a post
 router.post(
   "/downvote/:post_id",
   passport.authenticate("jwt", { session: false }),

@@ -93,3 +93,20 @@
 .postcard_comment_numbers {
   margin-left: 0.3rem;
 }
+
+.postcard_vote {
+  display: flex;
+  border-radius: 0.1rem;
+}
+
+.postcard_vote:hover {
+  background: var(--light_grey);
+}
+
+.postcard_upvote:hover {
+  color: var(--orange);
+}
+
+.postcard_downvote:hover {
+  color: var(--blue);
+}

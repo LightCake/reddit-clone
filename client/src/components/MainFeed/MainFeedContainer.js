@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import MainFeed from "./MainFeed";
 import { toggleRegister, toggleLogin } from "../../actions/modal";
-import { fetchAllPosts, fetchSubredditsPosts } from "../../actions/posts";
+import { fetchAllPosts } from "../../actions/posts";
 
 const mapStateToProps = state => ({
   session: state.session,
@@ -11,8 +11,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggleRegister: () => dispatch(toggleRegister()),
   toggleLogin: () => dispatch(toggleLogin()),
-  fetchAllPosts: () => dispatch(fetchAllPosts()),
-  fetchSubredditsPosts: subreddit => dispatch(fetchSubredditsPosts(subreddit))
+  fetchAllPosts: () => dispatch(fetchAllPosts())
 });
 
 export default connect(

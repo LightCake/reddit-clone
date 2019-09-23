@@ -19,7 +19,6 @@ const MainFeed = props => {
     session,
     match,
     fetchAllPosts,
-    fetchSubredditsPosts,
     posts
   } = props;
 
@@ -29,12 +28,8 @@ const MainFeed = props => {
   });
 
   useEffect(() => {
-    if (match.params.subreddit === undefined) {
-      fetchAllPosts();
-    } else {
-      fetchSubredditsPosts(match.params.subreddit);
-    }
-  }, [match.params.subreddit]);
+    fetchAllPosts();
+  }, []);
 
   const renderAuth = () => {
     return session.isAuthenticated ? (
@@ -68,7 +63,16 @@ const MainFeed = props => {
       </div>
       <div className="main_feed_posts">
         {posts.map(post => (
-          <PostCard title={post.title} text={post.text} />
+          <PostCard
+            key={post.id}
+            title={post.title}
+            text={post.text}
+            username={post.username}
+            subreddit={post.subreddit}
+            votes={post.votes}
+            time={post.created}
+            comments={post.comments}
+          />
         ))}
       </div>
     </div>

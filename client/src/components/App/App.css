@@ -17,6 +17,8 @@ body {
 :root {
   --orange: #ff4500;
   --grey: #878a8c;
+  --light_grey: #e0e1e2;
+  --blue: #5a75cc;
 }
 
 .app {
