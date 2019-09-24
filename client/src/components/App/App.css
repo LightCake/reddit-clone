@@ -32,3 +32,11 @@ body {
   /* Prevent child from growing bigger than the flexbox container */
   min-height: 0;
 }
+
+.orange {
+  color: var(--orange);
+}
+
+.blue {
+  color: var(--blue);
+}

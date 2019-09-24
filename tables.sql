@@ -46,6 +46,6 @@ CREATE TABLE post_votes (
   created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(ID),
   FOREIGN KEY (post_id) REFERENCES posts(ID),
-  CHECK (vote IN (-1, 1))
+  CHECK (vote IN (-1, 0, 1))
 );
 

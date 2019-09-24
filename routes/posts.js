@@ -71,38 +71,38 @@ router.post(
               // If the user already voted for the post
               if (res.rows.length > 0) {
                 const vote = res.rows[0];
-                // If the user already upvoted the post, delete it from the database
+                // If the user already upvoted the post, set the vote to 0
                 if (vote.vote === 1) {
                   db.query(
-                    "DELETE FROM post_votes WHERE post_id = $1 AND user_id = $2",
-                    [request.params.post_id, request.user.id],
+                    "UPDATE post_votes set vote = 0 WHERE id = $1 RETURNING *",
+                    [vote.id],
                     (err, res) => {
                       if (err) throw err;
 
-                      if (res) response.json({ msg: "success" });
+                      if (res) response.send(res.rows);
                     }
                   );
                 } else {
                   // If the user already downvoted the post, upvote the post
                   db.query(
-                    "UPDATE post_votes set vote = 1 WHERE id = $1",
+                    "UPDATE post_votes set vote = 1 WHERE id = $1 RETURNING *",
                     [vote.id],
                     (err, res) => {
                       if (err) throw err;
 
-                      if (res) response.json({ msg: "success" });
+                      if (res) response.send(res.rows);
                     }
                   );
                 }
               } else {
                 // If the user never voted the post, insert new vote into the database
                 db.query(
-                  "INSERT INTO post_votes (user_id, post_id, vote) VALUES ($1, $2, $3)",
+                  "INSERT INTO post_votes (user_id, post_id, vote) VALUES ($1, $2, $3) RETURNING *",
                   [request.user.id, request.params.post_id, 1],
                   (err, res) => {
                     if (err) throw err;
 
-                    if (res) response.json({ msg: "success" });
+                    if (res) response.send(res.rows);
                   }
                 );
               }

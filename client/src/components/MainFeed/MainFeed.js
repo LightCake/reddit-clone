@@ -5,7 +5,7 @@ import "./MainFeed.css";
 import Button from "../Button/Button";
 import RegisterContainer from "../Register/RegisterContainer";
 import LoginContainer from "../Login/LoginContainer";
-import PostCard from "../PostCard/PostCard";
+import PostCardContainer from "../PostCard/PostCardContainer";
 
 const options = [
   { value: "newest", label: "Newest" },
@@ -19,6 +19,7 @@ const MainFeed = props => {
     session,
     match,
     fetchAllPosts,
+    fetchPostVotes,
     posts
   } = props;
 
@@ -28,8 +29,14 @@ const MainFeed = props => {
   });
 
   useEffect(() => {
-    fetchAllPosts();
-  }, []);
+    fetchAllPosts(match.params.subreddit);
+  }, [match.params.subreddit]);
+
+  useEffect(() => {
+    if (session.isAuthenticated) {
+      fetchPostVotes();
+    }
+  }, [session.isAuthenticated]);
 
   const renderAuth = () => {
     return session.isAuthenticated ? (
@@ -63,13 +70,14 @@ const MainFeed = props => {
       </div>
       <div className="main_feed_posts">
         {posts.map(post => (
-          <PostCard
+          <PostCardContainer
             key={post.id}
+            id={post.id}
             title={post.title}
             text={post.text}
             username={post.username}
             subreddit={post.subreddit}
-            votes={post.votes}
+            voteNumber={post.votes}
             time={post.created}
             comments={post.comments}
           />

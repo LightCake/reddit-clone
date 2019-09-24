@@ -3,6 +3,7 @@ import session from "./session";
 import subreddits from "./subreddits";
 import modal from "./modal";
 import posts from "./posts";
+import votes from "./votes";
 import errors from "./errors";
 
 const root = combineReducers({
@@ -10,6 +11,7 @@ const root = combineReducers({
   subreddits,
   posts,
   modal,
+  votes,
   errors
 });
 

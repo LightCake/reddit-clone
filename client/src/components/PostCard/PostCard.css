@@ -97,6 +97,7 @@
 .postcard_vote {
   display: flex;
   border-radius: 0.1rem;
+  cursor: pointer;
 }
 
 .postcard_vote:hover {

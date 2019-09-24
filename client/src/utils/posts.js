@@ -55,18 +55,10 @@ export const commentFormat = number => {
   return number + " comments";
 };
 
-export const fetchAllPosts = () => {
-  return axios.get(`/api/posts/all/`);
+export const fetchAllPosts = (subreddit = "") => {
+  return axios.get(`/api/posts/all/${subreddit}`);
 };
 
 export const addPost = data => {
   return axios.post("/api/posts/add", data);
-};
-
-export const upvotePost = post_id => {
-  return axios.post(`/api/posts/upvote/${post_id}`);
-};
-
-export const downvotePost = post_id => {
-  return axios.post(`/api/posts/downvote/${post_id}`);
 };

@@ -7,17 +7,57 @@ import Button from "../Button/Button";
 import { timeSince, commentFormat } from "../../utils/posts";
 
 const PostCard = props => {
-  const { title, text, username, subreddit, votes, time, comments } = props;
+  const {
+    id,
+    title,
+    text,
+    username,
+    subreddit,
+    voteNumber,
+    upvotePost,
+    votes,
+    time,
+    comments
+  } = props;
+  const user_vote = votes.find(vote => vote.post_id === id);
+  const isUpvoted = vote => {
+    // Check if we have a vote of the post
+    if (user_vote) {
+      // If we have found a vote of the post, check whether it is a up- or downvote
+      // If the vote is undefined or 'up' and the users vote is an upvote (1) give it a orange color
+      // If the vote is undefined or 'down' and the users vote is an downvote (-1) give it a blue color
+      switch (user_vote.vote) {
+        case 1:
+          return vote === undefined || vote === "up" ? "orange" : "";
+        case -1:
+          return vote === undefined || vote === "down" ? "blue" : "";
+        default:
+          return;
+      }
+    } else {
+      // User has not voted for the post, return nothing
+      return;
+    }
+  };
+
+  const upvote = user_vote => () => {
+    upvotePost(user_vote);
+  };
 
   return (
     <div className="postcard">
       <div className="postcard_sidebar">
         <div className="postcard_arrows">
-          <div className="postcard_vote postcard_upvote">
+          <div
+            className={`postcard_vote postcard_upvote ${isUpvoted("up")}`}
+            onClick={upvote(user_vote)}
+          >
             <TiArrowUpThick size="1.5rem" />
           </div>
-          <div className="postcard_votes">{votes}</div>
-          <div className="postcard_vote postcard_downvote">
+          <div className={`postcard_votes ${isUpvoted()}`}>{voteNumber}</div>
+          <div
+            className={`postcard_vote postcard_downvote ${isUpvoted("down")}`}
+          >
             <TiArrowDownThick size="1.5rem" />
           </div>
         </div>
