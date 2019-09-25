@@ -19,6 +19,19 @@ router.get("/all/:subreddit?", (request, response) => {
   );
 });
 
+// Get a specific post by id
+router.get("/specific/:post_id", (request, response) => {
+  db.query(
+    "SELECT p.id, p.user_id, p.subreddit_id, p.title, p.text, p.created, sr.name as subreddit, u.name as username, SUM(pv.vote) as votes, COUNT(c.id) as comments FROM posts p LEFT OUTER JOIN post_votes pv ON (p.id = pv.post_id) LEFT OUTER JOIN subreddits sr ON (sr.id = p.subreddit_id) LEFT OUTER JOIN users u ON (u.id = p.user_id) LEFT OUTER JOIN comments c ON (c.post_id = p.id) WHERE (p.id = $1) GROUP BY p.id, sr.name, u.name",
+    [request.params.post_id],
+    (err, res) => {
+      if (err) throw err;
+
+      if (res) response.send(res.rows);
+    }
+  );
+});
+
 // Add a new post
 router.post(
   "/add",
@@ -83,7 +96,7 @@ router.post(
                     }
                   );
                 } else {
-                  // If the user already downvoted the post, upvote the post
+                  // Otherwise, upvote the post
                   db.query(
                     "UPDATE post_votes set vote = 1 WHERE id = $1 RETURNING *",
                     [vote.id],
@@ -139,38 +152,38 @@ router.post(
               // If the user already voted for the post
               if (res.rows.length > 0) {
                 const vote = res.rows[0];
-                // If the user already upvoted the post, change it to a downvote
-                if (vote.vote === 1) {
+                // If the user already downvoted the post, change it to 0
+                if (vote.vote === -1) {
                   db.query(
-                    "UPDATE post_votes set vote = -1 WHERE id = $1",
+                    "UPDATE post_votes set vote = 0 WHERE id = $1 RETURNING *",
                     [vote.id],
                     (err, res) => {
                       if (err) throw err;
 
-                      if (res) response.json({ msg: "success" });
+                      if (res) response.json(res.rows);
                     }
                   );
                 } else {
-                  // If the user already downvoted the post, delete it
+                  // Otherwise, downvote the post
                   db.query(
-                    "DELETE FROM post_votes WHERE post_id = $1 AND user_id = $2",
-                    [request.params.post_id, request.user.id],
+                    "UPDATE post_votes set vote = -1 WHERE id = $1 RETURNING *",
+                    [vote.id],
                     (err, res) => {
                       if (err) throw err;
 
-                      if (res) response.json({ msg: "success" });
+                      if (res) response.json(res.rows);
                     }
                   );
                 }
               } else {
                 // If the user never voted the post, insert new downvote into the database
                 db.query(
-                  "INSERT INTO post_votes (user_id, post_id, vote) VALUES ($1, $2, $3)",
+                  "INSERT INTO post_votes (user_id, post_id, vote) VALUES ($1, $2, $3) RETURNING *",
                   [request.user.id, request.params.post_id, -1],
                   (err, res) => {
                     if (err) throw err;
 
-                    if (res) response.json({ msg: "success" });
+                    if (res) response.json(res.rows);
                   }
                 );
               }

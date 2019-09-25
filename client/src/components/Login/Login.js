@@ -44,12 +44,7 @@ const Login = props => {
 
   return (
     <div className="login">
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleLogin}
-        style={customStyles}
-        contentLabel="Login Form"
-      >
+      <Modal isOpen={isOpen} style={customStyles} contentLabel="Login Form">
         <div className="login_header">
           <Button
             label="x"

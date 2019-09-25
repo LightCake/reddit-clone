@@ -5,6 +5,7 @@ import "./App.css";
 import SideBarContainer from "../SideBar/SideBarContainer";
 import MainFeedContainer from "../MainFeed/MainFeedContainer";
 import PostFormContainer from "../PostForm/PostFormContainer";
+import PostContainer from "../Post/PostContainer";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           path={["/", "/r/:subreddit"]}
           component={MainFeedContainer}
         />
+        <Route exact path="/r/:subreddit/post/:id" component={PostContainer} />
         <ProtectedRoute
           exact
           path="/r/:subreddit/post"

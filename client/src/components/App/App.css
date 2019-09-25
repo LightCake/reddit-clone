@@ -40,3 +40,8 @@ body {
 .blue {
   color: var(--blue);
 }
+
+.link {
+  color: inherit;
+  text-decoration: none;
+}

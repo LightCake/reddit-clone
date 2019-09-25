@@ -4,7 +4,7 @@
 }
 
 .postcard_sidebar {
-  width: 2.5rem;
+  width: 3rem;
   background: rgb(248, 249, 250);
 }
 
@@ -43,7 +43,11 @@
 
 .postcard_main_subreddit {
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.9rem;
+}
+
+.postcard_main_subreddit:hover {
+  text-decoration: underline;
 }
 
 .postcard_main_center {
@@ -81,13 +85,20 @@
 }
 
 .postcard_main_footer {
+  display: flex;
   font-size: 0.9rem;
   font-weight: 600;
+  color: var(--grey);
 }
 
 .postcard_footer_comments {
   display: flex;
-  color: var(--grey);
+  padding: 0.4rem;
+  border-radius: 0.2rem;
+}
+
+.postcard_footer_comments:hover {
+  background: var(--light_grey);
 }
 
 .postcard_comment_numbers {

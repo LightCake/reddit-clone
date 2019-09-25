@@ -46,12 +46,7 @@ const Register = props => {
 
   return (
     <div className="register">
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleRegister}
-        style={customStyles}
-        contentLabel="Register Form"
-      >
+      <Modal isOpen={isOpen} style={customStyles} contentLabel="Register Form">
         <div className="register_header">
           <Button
             label="x"

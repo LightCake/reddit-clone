@@ -59,6 +59,10 @@ export const fetchAllPosts = (subreddit = "") => {
   return axios.get(`/api/posts/all/${subreddit}`);
 };
 
+export const fetchPost = post_id => {
+  return axios.get(`/api/posts/specific/${post_id}`);
+};
+
 export const addPost = data => {
   return axios.post("/api/posts/add", data);
 };

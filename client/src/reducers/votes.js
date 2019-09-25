@@ -1,4 +1,4 @@
-import { RECEIVE_POST_VOTES, RECEIVE_UPVOTE } from "../actions/votes";
+import { RECEIVE_POST_VOTES, RECEIVE_VOTE } from "../actions/votes";
 
 const initialState = {
   post: [],
@@ -12,13 +12,21 @@ export default (state = initialState, action) => {
         ...state,
         post: action.post_votes
       };
-    case RECEIVE_UPVOTE:
-      return {
-        ...state,
-        post: state.post.map(vote =>
-          vote.id === action.vote.id ? action.vote : vote
-        )
-      };
+    case RECEIVE_VOTE:
+      const index = state.post.findIndex(vote => vote.id === action.vote.id);
+      if (index === -1) {
+        return {
+          ...state,
+          post: [...state.post, action.vote]
+        };
+      } else {
+        return {
+          ...state,
+          post: state.post.map(vote =>
+            vote.id === action.vote.id ? action.vote : vote
+          )
+        };
+      }
     default:
       return state;
   }

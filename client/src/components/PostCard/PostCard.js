@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { TiArrowUpThick, TiArrowDownThick } from "react-icons/ti";
 import { FaCommentAlt } from "react-icons/fa";
@@ -15,11 +16,18 @@ const PostCard = props => {
     subreddit,
     voteNumber,
     upvotePost,
+    downvotePost,
     votes,
     time,
-    comments
+    comments,
+    history
   } = props;
-  const user_vote = votes.find(vote => vote.post_id === id);
+
+  const user_vote = votes.find(vote => vote.post_id === id) || {
+    post_id: id,
+    vote: 0
+  };
+
   const isUpvoted = vote => {
     // Check if we have a vote of the post
     if (user_vote) {
@@ -40,12 +48,24 @@ const PostCard = props => {
     }
   };
 
-  const upvote = user_vote => () => {
+  const upvote = user_vote => event => {
+    // Prevents the click event of the parent div to trigger
+    event.stopPropagation();
     upvotePost(user_vote);
   };
 
+  const downvote = user_vote => event => {
+    // Prevents the click event of the parent div to trigger
+    event.stopPropagation();
+    downvotePost(user_vote);
+  };
+
+  const handleClick = event => {
+    history.push(`/r/${subreddit}/post/${id}`);
+  };
+
   return (
-    <div className="postcard">
+    <div className="postcard" onClick={handleClick}>
       <div className="postcard_sidebar">
         <div className="postcard_arrows">
           <div
@@ -57,6 +77,7 @@ const PostCard = props => {
           <div className={`postcard_votes ${isUpvoted()}`}>{voteNumber}</div>
           <div
             className={`postcard_vote postcard_downvote ${isUpvoted("down")}`}
+            onClick={downvote(user_vote)}
           >
             <TiArrowDownThick size="1.5rem" />
           </div>
@@ -64,7 +85,13 @@ const PostCard = props => {
       </div>
       <div className="postcard_main">
         <div className="postcard_main_header">
-          <div className="postcard_main_subreddit">r/{subreddit}</div>
+          <Link
+            className="postcard_main_subreddit link"
+            onClick={e => e.stopPropagation()}
+            to={`/r/${subreddit}`}
+          >
+            r/{subreddit}
+          </Link>
           <div className="postcard_main_dot">•</div>
           <div className="postcard_main_author">Posted by u/{username}</div>
           <div className="postcard_main_time">{timeSince(time)} ago</div>
@@ -89,4 +116,4 @@ const PostCard = props => {
 
 PostCard.propTypes = {};
 
-export default PostCard;
+export default withRouter(PostCard);

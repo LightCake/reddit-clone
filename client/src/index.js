@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // Logout the user and redirect to the login page
       store.dispatch(logout());
       window.location.href = "/";
+      // Reload
+      window.location.reload();
     }
   } else {
     // If this is a first time user, start with an empty store
