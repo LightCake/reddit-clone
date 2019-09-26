@@ -4,6 +4,7 @@ import subreddits from "./subreddits";
 import modal from "./modal";
 import posts from "./posts";
 import votes from "./votes";
+import comments from "./comments";
 import errors from "./errors";
 
 const root = combineReducers({
@@ -12,6 +13,7 @@ const root = combineReducers({
   posts,
   modal,
   votes,
+  comments,
   errors
 });
 

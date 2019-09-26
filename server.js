@@ -4,6 +4,7 @@ const users = require("./routes/users");
 const subreddits = require("./routes/subreddits");
 const posts = require("./routes/posts");
 const votes = require("./routes/votes");
+const comments = require("./routes/comments");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/api/users", users);
 app.use("/api/subreddits", subreddits);
 app.use("/api/posts", posts);
 app.use("/api/votes", votes);
+app.use("/api/comments", comments);
 
 const port = process.env.PORT || 6000;
 

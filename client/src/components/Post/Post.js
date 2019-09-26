@@ -7,11 +7,39 @@ import "./Post.css";
 import Button from "../Button/Button";
 import RegisterContainer from "../Register/RegisterContainer";
 import LoginContainer from "../Login/LoginContainer";
+import CommentContainer from "../Comment/CommentContainer";
 
-const Post = ({ fetchPost, match, session, toggleRegister, toggleLogin }) => {
+const Post = ({
+  fetchPost,
+  match,
+  session,
+  comments,
+  toggleRegister,
+  toggleLogin,
+  fetchPostComments
+}) => {
   useEffect(() => {
     fetchPost(match.params.id);
+    fetchPostComments(match.params.id);
   }, []);
+
+  const nestComments = comments => {
+    const commentMap = comments.reduce((acc, current) => {
+      acc[current.id] = current;
+      return acc;
+    }, {});
+
+    comments.forEach(comment => {
+      if (comment.comment_id !== null) {
+        const parent = commentMap[comment.comment_id];
+        (parent.children = parent.children || []).push(comment);
+      }
+    });
+
+    return Object.values(commentMap).filter(
+      comment => comment.comment_id === null
+    );
+  };
 
   const renderForm = () =>
     session.isAuthenticated ? (
@@ -83,6 +111,11 @@ const Post = ({ fetchPost, match, session, toggleRegister, toggleLogin }) => {
         </div>
       </div>
       {renderForm()}
+      <div className="post_comments_container">
+        {nestComments(comments).map(comment => (
+          <CommentContainer comment={comment} />
+        ))}
+      </div>
     </div>
   );
 };

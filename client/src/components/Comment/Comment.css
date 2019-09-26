@@ -1,0 +1,42 @@
+.comment_container {
+  display: flex;
+}
+
+.comment_arrows_container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.comment_main {
+  padding-left: 0.7rem;
+}
+
+.comment_header {
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.comment_header > *:not(:last-of-type) {
+  margin-right: 0.5rem;
+}
+
+.comment_text {
+  margin: 0.5rem 0;
+}
+
+.comment_footer {
+  font-weight: 700;
+  color: var(--grey);
+  font-size: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.comment_reply {
+  display: flex;
+}
+
+.comment_reply_text {
+  margin-left: 0.3rem;
+}
