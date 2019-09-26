@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { TiArrowUpThick, TiArrowDownThick } from "react-icons/ti";
@@ -16,8 +16,11 @@ const Post = ({
   comments,
   toggleRegister,
   toggleLogin,
-  fetchPostComments
+  fetchPostComments,
+  addPostComment
 }) => {
+  const [comment, setComment] = useState("");
+
   useEffect(() => {
     fetchPost(match.params.id);
     fetchPostComments(match.params.id);
@@ -41,11 +44,24 @@ const Post = ({
     );
   };
 
+  const handleFormSubmit = event => {
+    event.preventDefault();
+
+    const data = { post_id: match.params.id, text: comment };
+
+    addPostComment(data);
+    setComment("");
+  };
+
   const renderForm = () =>
     session.isAuthenticated ? (
       <div className="comment_form_container">
-        <form className="comment_form">
-          <textarea className="comment_form_textarea" />
+        <form className="comment_form" onSubmit={handleFormSubmit}>
+          <textarea
+            className="comment_form_textarea"
+            value={comment}
+            onChange={event => setComment(event.target.value)}
+          />
           <Button
             type="submit"
             label="Comment"
