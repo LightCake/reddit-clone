@@ -6,14 +6,17 @@ import { fetchPostComments, addPostComment } from "../../actions/comments";
 
 const mapStateToProps = state => ({
   session: state.session,
-  comments: state.comments.post
+  comments: state.comments.post,
+  post: state.posts.specific
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchPost: post_id => dispatch(fetchPost(post_id)),
+  fetchPost: (post_id, setPostLoading) =>
+    dispatch(fetchPost(post_id, setPostLoading)),
   toggleRegister: () => dispatch(toggleRegister()),
   toggleLogin: () => dispatch(toggleLogin()),
-  fetchPostComments: post_id => dispatch(fetchPostComments(post_id)),
+  fetchPostComments: (post_id, setCommentsLoading) =>
+    dispatch(fetchPostComments(post_id, setCommentsLoading)),
   addPostComment: comment => dispatch(addPostComment(comment))
 });
 

@@ -6,10 +6,9 @@ import "./SideBar.css";
 import SideBarSub from "../SideBarSub/SideBarSub";
 import Input from "../Input/Input";
 import Spinner from "../Spinner/Spinner";
+import SubredditFormContainer from "../SubredditForm/SubredditFormContainer";
 
-const SideBar = props => {
-  const { subreddits, fetchAllSubreddits } = props;
-
+const SideBar = ({ subreddits, fetchAllSubreddits, toggleSubreddit }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,8 +25,13 @@ const SideBar = props => {
         <img src={Logo} alt="logo" className="sidebar_logo" />
       </Link>
 
-      <span className="sidebar_subreddits_header">Subreddits</span>
-
+      <div className="sidebar_group">
+        <span className="sidebar_subreddits_header">Subreddits</span>
+        <button className="sidebar_subreddit_add" onClick={toggleSubreddit}>
+          +
+        </button>
+        <SubredditFormContainer />
+      </div>
       <Input
         placeholder="Search"
         className="sidebar_input"

@@ -13,10 +13,11 @@ export const receiveComment = comment => ({
   comment
 });
 
-export const fetchPostComments = post_id => dispatch => {
-  API.fetchPostComments(post_id).then(res =>
-    dispatch(receivePostComments(res.data))
-  );
+export const fetchPostComments = (post_id, setCommentsLoading) => dispatch => {
+  API.fetchPostComments(post_id).then(res => {
+    dispatch(receivePostComments(res.data));
+    setCommentsLoading(false);
+  });
 };
 
 export const addPostComment = comment => dispatch => {

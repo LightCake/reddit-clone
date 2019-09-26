@@ -45,38 +45,36 @@ const Register = props => {
   };
 
   return (
-    <div className="register">
-      <Modal isOpen={isOpen} style={customStyles} contentLabel="Register Form">
-        <div className="register_header">
-          <Button
-            label="x"
-            style={{ padding: "0", height: "1.5rem", width: "1.5rem" }}
-            onClick={toggleRegister}
-          ></Button>
-        </div>
-        <form className="register_form" onSubmit={handleSubmit}>
-          <Input
-            label="Username"
-            type="text"
-            value={name}
-            onChange={update(setName)}
-          />
-          <Input
-            label="Password"
-            type="password"
-            value={password}
-            onChange={update(setPassword)}
-          />
-          <Input
-            label="Confirm Password"
-            type="password"
-            value={password2}
-            onChange={update(setPassword2)}
-          />
-          <Button type="submit" label="Register" />
-        </form>
-      </Modal>
-    </div>
+    <Modal isOpen={isOpen} style={customStyles} contentLabel="Register Form">
+      <div className="register_header">
+        <Button
+          label="x"
+          style={{ padding: "0", height: "1.5rem", width: "1.5rem" }}
+          onClick={toggleRegister}
+        ></Button>
+      </div>
+      <form className="register_form" onSubmit={handleSubmit}>
+        <Input
+          label="Username"
+          type="text"
+          value={name}
+          onChange={update(setName)}
+        />
+        <Input
+          label="Password"
+          type="password"
+          value={password}
+          onChange={update(setPassword)}
+        />
+        <Input
+          label="Confirm Password"
+          type="password"
+          value={password2}
+          onChange={update(setPassword2)}
+        />
+        <Button type="submit" label="Register" />
+      </form>
+    </Modal>
   );
 };
 

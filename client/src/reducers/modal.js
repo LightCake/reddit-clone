@@ -1,8 +1,13 @@
-import { TOGGLE_REGISTER, TOGGLE_LOGIN } from "../actions/modal";
+import {
+  TOGGLE_REGISTER,
+  TOGGLE_LOGIN,
+  TOGGLE_SUBREDDIT
+} from "../actions/modal";
 
 const initialState = {
   registerOpen: false,
-  loginOpen: false
+  loginOpen: false,
+  subredditOpen: false
 };
 
 export default (state = initialState, action) => {
@@ -16,6 +21,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loginOpen: !state.loginOpen
+      };
+    case TOGGLE_SUBREDDIT:
+      return {
+        ...state,
+        subredditOpen: !state.subredditOpen
       };
     default:
       return state;

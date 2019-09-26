@@ -1,8 +1,10 @@
-import { RECEIVE_ALL_SUBREDDITS } from "../actions/subreddits";
+import {
+  RECEIVE_ALL_SUBREDDITS,
+  RECEIVE_SUBREDDIT
+} from "../actions/subreddits";
 
 const initialState = {
-  all: [],
-  current: null
+  all: []
 };
 
 export default (state = initialState, action) => {
@@ -11,6 +13,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         all: action.subreddits
+      };
+    case RECEIVE_SUBREDDIT:
+      return {
+        ...state,
+        all: state.all.concat(action.subreddit)
       };
     default:
       return state;

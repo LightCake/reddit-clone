@@ -1,5 +1,6 @@
 import { RECEIVE_POSTS, RECEIVE_POST } from "../actions/posts";
 import { RECEIVE_VOTE_DELTA } from "../actions/votes";
+import { RECEIVE_COMMENT } from "../actions/comments";
 
 const initialState = {
   all: [],
@@ -27,6 +28,14 @@ export default (state = initialState, action) => {
           }
           return post;
         })
+      };
+    case RECEIVE_COMMENT:
+      return {
+        ...state,
+        specific: {
+          ...state.specific,
+          comments: parseInt(state.specific.comments) + 1 + ""
+        }
       };
     default:
       return state;

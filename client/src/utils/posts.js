@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 
 // Convert timestamp to relative time
@@ -53,6 +54,15 @@ export const commentFormat = number => {
     }k comments`;
   }
   return number + " comments";
+};
+
+export const displayNewline = text => {
+  return text.split("\n").map((item, key) => (
+    <React.Fragment key={key}>
+      {item}
+      <br />
+    </React.Fragment>
+  ));
 };
 
 export const fetchAllPosts = (subreddit = "") => {

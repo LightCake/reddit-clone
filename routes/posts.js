@@ -22,12 +22,12 @@ router.get("/all/:subreddit?", (request, response) => {
 // Get a specific post by id
 router.get("/specific/:post_id", (request, response) => {
   db.query(
-    "SELECT p.id, p.user_id, p.subreddit_id, p.title, p.text, p.created, sr.name as subreddit, u.name as username, SUM(pv.vote) as votes, COUNT(c.id) as comments FROM posts p LEFT OUTER JOIN post_votes pv ON (p.id = pv.post_id) LEFT OUTER JOIN subreddits sr ON (sr.id = p.subreddit_id) LEFT OUTER JOIN users u ON (u.id = p.user_id) LEFT OUTER JOIN comments c ON (c.post_id = p.id) WHERE (p.id = $1) GROUP BY p.id, sr.name, u.name",
+    "SELECT p.id, p.user_id, p.subreddit_id, p.title, p.text, p.created, sr.name as subreddit, u.name as username, SUM(pv.vote) as votes, gc.number as comments FROM posts p LEFT OUTER JOIN post_votes pv ON (p.id = pv.post_id) LEFT OUTER JOIN subreddits sr ON (sr.id = p.subreddit_id) LEFT OUTER JOIN users u ON (u.id = p.user_id) LEFT OUTER JOIN (SELECT post_id, COUNT(*) AS number FROM comments GROUP BY post_id) gc ON (gc.post_id = p.id) WHERE (p.id = $1) GROUP BY p.id, sr.name, u.name, gc.number",
     [request.params.post_id],
     (err, res) => {
       if (err) throw err;
 
-      if (res) response.send(res.rows);
+      if (res) response.send(res.rows[0]);
     }
   );
 });

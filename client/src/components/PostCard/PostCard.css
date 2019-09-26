@@ -122,3 +122,12 @@
 .postcard_downvote:hover {
   color: var(--blue);
 }
+
+.postcard_author_link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.postcard_author_link:hover {
+  text-decoration: underline;
+}

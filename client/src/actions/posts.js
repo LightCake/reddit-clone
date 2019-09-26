@@ -17,8 +17,11 @@ export const fetchAllPosts = subreddit => dispatch => {
   API.fetchAllPosts(subreddit).then(res => dispatch(receivePosts(res.data)));
 };
 
-export const fetchPost = post_id => dispatch => {
-  API.fetchPost(post_id).then(res => dispatch(receivePost(res.data)));
+export const fetchPost = (post_id, setPostLoading) => dispatch => {
+  API.fetchPost(post_id).then(res => {
+    dispatch(receivePost(res.data));
+    setPostLoading(false);
+  });
 };
 
 export const addPost = data => () => {

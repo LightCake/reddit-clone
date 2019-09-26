@@ -7,6 +7,7 @@
 .post {
   display: flex;
   background: white;
+  padding: 1rem;
 }
 
 .post_vote_container {
@@ -134,7 +135,7 @@
 }
 
 .post_comments_container {
-  padding: 0.5rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

@@ -17,7 +17,18 @@
   color: var(--orange);
   font-size: 1.1rem;
   font-weight: 600;
-  margin: 0 1rem 1rem;
+}
+
+.sidebar_subreddit_add {
+  font-size: 1.5rem;
+  border-radius: 50%;
+  border: none;
+  height: 2rem;
+  width: 2rem;
+  padding-bottom: 0.5rem;
+  background: var(--orange);
+  color: white;
+  cursor: pointer;
 }
 
 .sidebar_subreddits {
@@ -28,4 +39,11 @@
 .sidebar_input {
   width: 80%;
   margin: 0 1rem;
+}
+
+.sidebar_group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
 }

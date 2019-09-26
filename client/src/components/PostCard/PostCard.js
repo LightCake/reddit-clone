@@ -5,7 +5,7 @@ import { TiArrowUpThick, TiArrowDownThick } from "react-icons/ti";
 import { FaCommentAlt } from "react-icons/fa";
 import "./PostCard.css";
 import Button from "../Button/Button";
-import { timeSince, commentFormat } from "../../utils/posts";
+import { timeSince, commentFormat, displayNewline } from "../../utils/posts";
 
 const PostCard = props => {
   const {
@@ -93,13 +93,22 @@ const PostCard = props => {
             r/{subreddit}
           </Link>
           <div className="postcard_main_dot">•</div>
-          <div className="postcard_main_author">Posted by u/{username}</div>
+          <div className="postcard_main_author">
+            Posted by{" "}
+            <Link
+              to="/"
+              className="postcard_author_link"
+              onClick={e => e.stopPropagation()}
+            >
+              {`u/${username}`}
+            </Link>
+          </div>
           <div className="postcard_main_time">{timeSince(time)} ago</div>
           <Button label="+ Join" className="postcard_join" />
         </div>
         <div className="postcard_main_center">
           <div className="postcard_main_title">{title}</div>
-          <div className="postcard_main_text">{text}</div>
+          <div className="postcard_main_text">{displayNewline(text)}</div>
         </div>
         <div className="postcard_main_footer">
           <div className="postcard_footer_comments">
