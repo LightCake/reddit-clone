@@ -1,10 +1,12 @@
 import {
   RECEIVE_ALL_SUBREDDITS,
-  RECEIVE_SUBREDDIT
+  RECEIVE_SUBREDDIT,
+  SET_SUBREDDIT
 } from "../actions/subreddits";
 
 const initialState = {
-  all: []
+  all: [],
+  current: null
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +20,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         all: state.all.concat(action.subreddit)
+      };
+    case SET_SUBREDDIT:
+      return {
+        ...state,
+        current: action.subreddit === undefined ? null : action.subreddit
       };
     default:
       return state;

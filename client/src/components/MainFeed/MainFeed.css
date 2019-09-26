@@ -34,6 +34,7 @@
 }
 
 .main_feed_posts {
+  overflow-y: scroll;
 }
 
 .main_feed_subreddit {

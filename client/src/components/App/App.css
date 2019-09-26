@@ -8,6 +8,14 @@ html {
   box-sizing: inherit;
 }
 
+html,
+body,
+#root,
+.app,
+.app > div {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
@@ -22,7 +30,6 @@ body {
 }
 
 .app {
-  height: 100vh;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 }

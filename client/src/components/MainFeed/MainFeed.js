@@ -20,6 +20,7 @@ const MainFeed = props => {
     match,
     fetchAllPosts,
     fetchPostVotes,
+    setSubreddit,
     posts
   } = props;
 
@@ -30,6 +31,7 @@ const MainFeed = props => {
 
   useEffect(() => {
     fetchAllPosts(match.params.subreddit);
+    setSubreddit(match.params.subreddit);
   }, [match.params.subreddit]);
 
   useEffect(() => {

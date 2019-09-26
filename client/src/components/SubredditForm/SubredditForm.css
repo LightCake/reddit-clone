@@ -1,5 +1,38 @@
-.subreddit_close {
-  padding: 0;
-  height: 1.5rem;
-  width: 1.5rem;
+.subreddit_form_modal {
+  display: flex;
+  height: 100%;
+}
+
+.subreddit_form_image {
+  width: 10rem;
+  object-fit: cover;
+}
+
+.subreddit_form_right {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.subreddit_header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.subreddit_form_container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subreddit_form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.subreddit_form_button {
+  margin-top: 1rem;
 }

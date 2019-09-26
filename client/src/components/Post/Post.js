@@ -10,6 +10,7 @@ import LoginContainer from "../Login/LoginContainer";
 import CommentContainer from "../Comment/CommentContainer";
 import Spinner from "../Spinner/Spinner";
 import { timeSince, commentFormat, displayNewline } from "../../utils/posts";
+import { setSubreddit } from "../../actions/subreddits";
 
 const Post = ({
   fetchPost,
@@ -20,6 +21,7 @@ const Post = ({
   toggleRegister,
   toggleLogin,
   fetchPostComments,
+  setSubreddit,
   addPostComment
 }) => {
   const [comment, setComment] = useState("");
@@ -30,6 +32,11 @@ const Post = ({
     fetchPost(match.params.id, setPostLoading);
     fetchPostComments(match.params.id, setCommentsLoading);
   }, []);
+
+  useEffect(() => {
+    setSubreddit(match.params.subreddit);
+    console.log("Subreddit: ", match.params.subreddit);
+  }, [match.params.subreddit]);
 
   const nestComments = comments => {
     const commentMap = comments.reduce((acc, current) => {

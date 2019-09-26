@@ -57,12 +57,15 @@ export const commentFormat = number => {
 };
 
 export const displayNewline = text => {
-  return text.split("\n").map((item, key) => (
-    <React.Fragment key={key}>
-      {item}
-      <br />
-    </React.Fragment>
-  ));
+  return text
+    .replace(/\n$/, "")
+    .split("\n")
+    .map((item, key) => (
+      <React.Fragment key={key}>
+        {item}
+        <br />
+      </React.Fragment>
+    ));
 };
 
 export const fetchAllPosts = (subreddit = "") => {

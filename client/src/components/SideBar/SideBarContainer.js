@@ -4,7 +4,8 @@ import { fetchAllSubreddits } from "../../actions/subreddits";
 import { toggleSubreddit } from "../../actions/modal";
 
 const mapStateToProps = state => ({
-  subreddits: state.subreddits
+  subreddits: state.subreddits,
+  session: state.session
 });
 
 const mapDispatchToProps = dispatch => ({

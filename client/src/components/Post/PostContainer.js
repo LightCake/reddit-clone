@@ -3,6 +3,7 @@ import Post from "./Post";
 import { fetchPost } from "../../actions/posts";
 import { toggleRegister, toggleLogin } from "../../actions/modal";
 import { fetchPostComments, addPostComment } from "../../actions/comments";
+import { setSubreddit } from "../../actions/subreddits";
 
 const mapStateToProps = state => ({
   session: state.session,
@@ -17,7 +18,8 @@ const mapDispatchToProps = dispatch => ({
   toggleLogin: () => dispatch(toggleLogin()),
   fetchPostComments: (post_id, setCommentsLoading) =>
     dispatch(fetchPostComments(post_id, setCommentsLoading)),
-  addPostComment: comment => dispatch(addPostComment(comment))
+  addPostComment: comment => dispatch(addPostComment(comment)),
+  setSubreddit: subreddit => dispatch(setSubreddit(subreddit))
 });
 
 export default connect(

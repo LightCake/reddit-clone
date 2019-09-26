@@ -11,6 +11,10 @@
   border-left: 3px solid var(--orange);
 }
 
+.border_left_orange {
+  border-left: 3px solid var(--orange);
+}
+
 .sidebar_sub_name {
   font-size: 1rem;
   margin-top: 0.2rem;

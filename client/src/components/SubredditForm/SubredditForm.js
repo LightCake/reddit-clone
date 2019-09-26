@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import "./SubredditForm.css";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
+import OrangeStairs from "../../assets/orange_stairs.jpg";
 
 const customStyles = {
   overlay: {
@@ -17,7 +18,9 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     border: "none",
-    padding: "1rem"
+    padding: "0",
+    height: "20rem",
+    width: "30rem"
   }
 };
 
@@ -39,22 +42,37 @@ const SubredditForm = ({ isOpen, toggleSubreddit, createSubreddit }) => {
 
   return (
     <Modal isOpen={isOpen} style={customStyles} contentLabel="Subreddit Form">
-      <div className="subreddit_header">
-        <Button
-          label="x"
-          className="subreddit_close"
-          onClick={toggleSubreddit}
-        ></Button>
-      </div>
-      <form className="subreddit_form" onSubmit={handleSubmit}>
-        <Input
-          label="Subreddit Name"
-          type="text"
-          value={name}
-          onChange={update(setName)}
+      <div className="subreddit_form_modal">
+        <img
+          src={OrangeStairs}
+          alt="orange stairs"
+          className="subreddit_form_image"
         />
-        <Button type="submit" label="Create" />
-      </form>
+        <div className="subreddit_form_right">
+          <div className="subreddit_header">
+            <Button
+              label="x"
+              style={{ height: "1.5rem", width: "1.5rem", padding: "0" }}
+              onClick={toggleSubreddit}
+            />
+          </div>
+          <div className="subreddit_form_container">
+            <form className="subreddit_form" onSubmit={handleSubmit}>
+              <Input
+                label="Subreddit"
+                type="text"
+                value={name}
+                onChange={update(setName)}
+              />
+              <Button
+                type="submit"
+                label="Create"
+                className="subreddit_form_button"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
     </Modal>
   );
 };
