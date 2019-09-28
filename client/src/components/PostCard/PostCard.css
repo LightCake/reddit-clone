@@ -17,13 +17,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0.5rem;
+  margin: 0.8rem;
 }
 
 .postcard_main {
   flex: 1;
   background: white;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 .postcard_main_header {

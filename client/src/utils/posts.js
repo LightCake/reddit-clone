@@ -46,6 +46,7 @@ export const timeSince = date => {
 };
 
 export const commentFormat = number => {
+  if (number === null) return "0 comments";
   if (number === "1") return "1 comment";
   if (number.length > 3) {
     const digitAfterDot = number[number.length - 3];

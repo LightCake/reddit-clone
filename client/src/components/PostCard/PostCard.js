@@ -104,7 +104,6 @@ const PostCard = props => {
             </Link>
           </div>
           <div className="postcard_main_time">{timeSince(time)} ago</div>
-          <Button label="+ Join" className="postcard_join" />
         </div>
         <div className="postcard_main_center">
           <div className="postcard_main_title">{title}</div>

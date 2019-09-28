@@ -7,6 +7,7 @@
 .sidebar_logo_link {
   align-self: flex-start;
   margin: 1.5rem 1rem;
+  outline: none;
 }
 
 .sidebar_logo {

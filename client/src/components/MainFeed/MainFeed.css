@@ -2,39 +2,48 @@
   background: rgb(241, 241, 241);
   display: flex;
   flex-direction: column;
-  padding: 2rem;
-}
-
-.main_feed > * {
-  margin-bottom: 3rem;
+  overflow-y: scroll;
 }
 
 .main_feed_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 2rem;
 }
 
 .main_feed_header_right > *:not(:last-of-type) {
   margin-right: 1rem;
 }
 
-.main_feed_select {
+.main_feed_select_container {
   display: flex;
   align-items: center;
 }
 
-.main_feed_select_label {
-  font-weight: 700;
+.main_feed_select_container > *:not(:last-of-type) {
+  margin-right: 1rem;
 }
 
-.main_feed_sort {
-  margin-left: 1rem;
+.main_feed_select_label {
+  font-weight: 700;
+  margin-right: 1rem;
+}
+
+.main_feed_top_select {
   width: 8rem;
 }
 
+.main_feed_sort_select {
+  width: 5.5rem;
+}
+
 .main_feed_posts {
-  overflow-y: scroll;
+  padding: 0 2rem;
+}
+
+.main_feed_posts > * {
+  margin-bottom: 2rem;
 }
 
 .main_feed_subreddit {

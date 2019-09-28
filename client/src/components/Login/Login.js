@@ -46,7 +46,11 @@ const Login = props => {
     <div className="login">
       <Modal isOpen={isOpen} style={customStyles} contentLabel="Login Form">
         <div className="login_header">
-          <Button label="x" onClick={toggleLogin}></Button>
+          <Button
+            label="x"
+            onClick={toggleLogin}
+            style={{ height: "1.5rem", width: "1.5rem", padding: "0" }}
+          ></Button>
         </div>
         <form className="login_form" onSubmit={handleSubmit}>
           <Input

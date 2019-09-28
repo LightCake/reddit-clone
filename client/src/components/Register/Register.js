@@ -47,7 +47,11 @@ const Register = props => {
   return (
     <Modal isOpen={isOpen} style={customStyles} contentLabel="Register Form">
       <div className="register_header">
-        <Button label="x" onClick={toggleRegister}></Button>
+        <Button
+          label="x"
+          onClick={toggleRegister}
+          style={{ height: "1.5rem", width: "1.5rem", padding: "0" }}
+        ></Button>
       </div>
       <form className="register_form" onSubmit={handleSubmit}>
         <Input

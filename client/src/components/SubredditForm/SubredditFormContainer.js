@@ -9,7 +9,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   toggleSubreddit: () => dispatch(toggleSubreddit()),
-  createSubreddit: subreddit => dispatch(createSubreddit(subreddit))
+  createSubreddit: (subreddit, setName) =>
+    dispatch(createSubreddit(subreddit, setName))
 });
 
 export default connect(

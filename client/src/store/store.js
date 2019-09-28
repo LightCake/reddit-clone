@@ -1,13 +1,13 @@
 import ReduxThunk from "redux-thunk";
 import { applyMiddleware, compose, createStore } from "redux";
-import rootReducer from "../reducers/root";
+import reducer from "../reducers";
 
 const configureStore = (preloadedState = {}) => {
   const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
   return createStore(
-    rootReducer,
+    reducer,
     preloadedState,
     composeEnhancers(applyMiddleware(ReduxThunk))
   );

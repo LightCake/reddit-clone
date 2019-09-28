@@ -33,11 +33,15 @@ const SubredditForm = ({ isOpen, toggleSubreddit, createSubreddit }) => {
     fn(event.target.value);
   };
 
+  const handleClose = () => {
+    toggleSubreddit();
+    setName("");
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
 
-    createSubreddit({ name });
-    setName("");
+    createSubreddit({ name }, setName);
   };
 
   return (
@@ -53,7 +57,7 @@ const SubredditForm = ({ isOpen, toggleSubreddit, createSubreddit }) => {
             <Button
               label="x"
               style={{ height: "1.5rem", width: "1.5rem", padding: "0" }}
-              onClick={toggleSubreddit}
+              onClick={handleClose}
             />
           </div>
           <div className="subreddit_form_container">

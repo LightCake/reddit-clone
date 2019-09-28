@@ -1,5 +1,6 @@
 import jwt_decode from "jwt-decode";
 import * as API from "../utils/session";
+import { toggleLogin } from "./modal";
 
 // Action Types
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
@@ -39,7 +40,9 @@ export const login = (user, history) => dispatch => {
       const decoded_token = jwt_decode(token);
       // Save the user in the redux store state
       dispatch(receiveCurrentUser(decoded_token));
-      // After a successful login push the user to the chat page
+      // Close the login form modal
+      dispatch(toggleLogin());
+      // After a successful login push the user to the Front page
       history.push("/");
     })
     .catch(err => {

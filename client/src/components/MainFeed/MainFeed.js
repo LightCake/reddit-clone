@@ -7,11 +7,6 @@ import RegisterContainer from "../Register/RegisterContainer";
 import LoginContainer from "../Login/LoginContainer";
 import PostCardContainer from "../PostCard/PostCardContainer";
 
-const options = [
-  { value: "newest", label: "Newest" },
-  { value: "top", label: "Top" }
-];
-
 const MainFeed = props => {
   const {
     toggleRegister,
@@ -21,12 +16,18 @@ const MainFeed = props => {
     fetchAllPosts,
     fetchPostVotes,
     setSubreddit,
-    posts
+    logout,
+    posts,
+    history
   } = props;
 
-  const [selectedSort, setselectedSort] = useState({
-    value: "newest",
-    label: "Newest"
+  const [selectedSort, setSelectedSort] = useState({
+    value: "new",
+    label: "New"
+  });
+  const [selectedTop, setSelectedTop] = useState({
+    value: "today",
+    label: "Today"
   });
 
   useEffect(() => {
@@ -42,7 +43,16 @@ const MainFeed = props => {
 
   const renderAuth = () => {
     return session.isAuthenticated ? (
-      <div>Profile</div>
+      <React.Fragment>
+        {match.params.subreddit && (
+          <Button
+            label="Post"
+            onClick={() => history.push(history.location.pathname + "/post")}
+          />
+        )}
+        <Button label="Profile" />
+        <Button label="Logout" onClick={logout} />
+      </React.Fragment>
     ) : (
       <React.Fragment>
         <Button label="Register" onClick={toggleRegister} />
@@ -52,21 +62,37 @@ const MainFeed = props => {
       </React.Fragment>
     );
   };
-
+  console.log(history.location.pathname);
   return (
     <div className="main_feed">
       <div className="main_feed_header">
         <div className="main_feed_header_left">
-          <div className="main_feed_select">
+          <div className="main_feed_select_container">
             <span className="main_feed_select_label">Sort</span>
             <Select
               value={selectedSort}
-              onChange={setselectedSort}
-              options={options}
-              className="main_feed_sort"
+              onChange={setSelectedSort}
+              options={[
+                { value: "new", label: "New" },
+                { value: "top", label: "Top" }
+              ]}
+              className="main_feed_sort_select"
             />
+            {selectedSort.value === "top" && (
+              <Select
+                value={selectedTop}
+                onChange={setSelectedTop}
+                options={[
+                  { value: "today", label: "Today" },
+                  { value: "week", label: "This Week" },
+                  { value: "month", label: "This Month" },
+                  { value: "year", label: "This Year" },
+                  { value: "all", label: "All Time" }
+                ]}
+                className="main_feed_top_select"
+              />
+            )}
           </div>
-          {match.params.subreddit && <div>{match.params.subreddit}</div>}
         </div>
         <div className="main_feed_header_right">{renderAuth()}</div>
       </div>

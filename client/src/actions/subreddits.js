@@ -1,4 +1,5 @@
 import * as API from "../utils/subreddits";
+import { toggleSubreddit } from "./modal";
 
 // Action types
 export const RECEIVE_ALL_SUBREDDITS = "RECEIVE_ALL_SUBREDDITS";
@@ -28,8 +29,10 @@ export const fetchAllSubreddits = (setLoading, search) => dispatch => {
   });
 };
 
-export const createSubreddit = subreddit => dispatch => {
-  API.createSubreddit(subreddit).then(res =>
-    dispatch(receiveSubreddit(res.data))
-  );
+export const createSubreddit = (subreddit, setName) => dispatch => {
+  API.createSubreddit(subreddit).then(res => {
+    dispatch(receiveSubreddit(res.data));
+    dispatch(toggleSubreddit());
+    setName("");
+  });
 };
