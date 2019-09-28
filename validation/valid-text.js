@@ -1,4 +1,4 @@
-// Check whether the input it is a string with a length greater than 0
+// Check whether the value is a string with a length greater than 0
 const validText = str => {
   return typeof str === "string" && str.trim().length > 0;
 };

@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
         ...state,
         all: state.all.map(post => {
           if (post.id === action.data.post_id) {
-            post.votes = parseInt(post.votes) + action.data.vote_delta;
+            post.votes = (post.votes === null ? 1 : parseInt(post.votes) + action.data.vote_delta);
           }
           return post;
         })

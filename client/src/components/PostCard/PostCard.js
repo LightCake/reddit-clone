@@ -2,7 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { TiArrowUpThick, TiArrowDownThick } from "react-icons/ti";
-import { FaCommentAlt } from "react-icons/fa";
+import { FaCommentAlt, FaCircle } from "react-icons/fa";
 import "./PostCard.css";
 import Button from "../Button/Button";
 import { timeSince, commentFormat, displayNewline } from "../../utils/posts";
@@ -74,7 +74,7 @@ const PostCard = props => {
           >
             <TiArrowUpThick size="1.5rem" />
           </div>
-          <div className={`postcard_votes ${isUpvoted()}`}>{voteNumber}</div>
+          <div className={`postcard_votes ${isUpvoted()}`}>{voteNumber === null ? <FaCircle size=".3rem" /> : voteNumber}</div>
           <div
             className={`postcard_vote postcard_downvote ${isUpvoted("down")}`}
             onClick={downvote(user_vote)}

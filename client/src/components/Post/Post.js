@@ -10,7 +10,7 @@ import LoginContainer from "../Login/LoginContainer";
 import CommentContainer from "../Comment/CommentContainer";
 import Spinner from "../Spinner/Spinner";
 import { timeSince, commentFormat, displayNewline } from "../../utils/posts";
-import { setSubreddit } from "../../actions/subreddits";
+import NoComments from "../NoComments/NoComments";
 
 const Post = ({
   fetchPost,
