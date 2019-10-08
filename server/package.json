@@ -1,0 +1,33 @@
+{
+  "name": "reddit",
+  "version": "1.0.0",
+  "description": "reddit clone",
+  "main": "server.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client-install": "cd ../client && npm install",
+    "client": "cd ../client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd ../client && npm install && npm run build"
+  },
+  "keywords": [
+    "reddit",
+    "clone"
+  ],
+  "author": "joey liew",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "concurrently": "^4.1.2",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.19.4",
+    "pg": "^7.12.1",
+    "validator": "^11.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}
